@@ -18,10 +18,15 @@ function colorRandomizer(opacity) {
 }
 
 // Append the body with the created box x*9 amount of times with argument for desired number of rows
-function boardMaker(numRows) {
+function boardMaker(numRows, ifGradient) {
   numRows *= 9;
-  let opacityStep = (100 / numRows) * 0.01;
-  let opacity = opacityStep;
+  let opacity = 1;
+  let opacityStep = 0;
+  if (ifGradient) {
+    console.log("gradient");
+    opacityStep = (100 / numRows) * 0.01;
+    opacity = opacityStep;
+  }
   for (let i = 0; i < numRows; i++) {
     if (i % 2 === 0) {
       let box = boxMaker(colorRandomizer(opacity));
@@ -35,3 +40,7 @@ function boardMaker(numRows) {
 }
 
 boardMaker(9);
+setInterval(function () {
+  document.body.innerHTML = "";
+  boardMaker(9);
+}, 2000);
